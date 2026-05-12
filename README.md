@@ -75,8 +75,8 @@ GraphIP-Bench addresses this gap. It standardises the evaluation of two compleme
       <p>Beyond the seven homophilic graphs of the core protocol, we add OGBN-Arxiv (169K nodes, 40 classes) and the heterophilic RomanEmpire / AmazonRatings to stress test attack and defense behaviour.</p>
     </td>
     <td width="50%">
-      <h3>Faithful, paper-aligned attacks</h3>
-      <p>MEA2 follows the Wu 2022 structure-only protocol with one-hot node-ID features; DFEA_I/II/III ship with both the data-free synthetic-query and the paper-faithful real-graph proxy variants used in the Zhuang 2024 paper.</p>
+      <h3>Reproducible by construction</h3>
+      <p>Fixed seeds, shared query sets, and JSON-Lines output records per (dataset, attack, defense, regime, budget, seed) cell. A single-seed run is directly comparable to the corresponding cell in the paper.</p>
     </td>
   </tr>
 </table>
@@ -203,14 +203,14 @@ Supplementary tracks:
 <tr><th align="left">Category</th><th align="left">Name</th><th align="left">Key idea</th></tr>
 <tr><td rowspan="7"><b>Data-driven</b></td>
 <td><code>MEA0</code>–<code>MEA1</code></td><td>Random / shuffled-order subgraph queries (Wu 2022 baselines)</td></tr>
-<tr><td><code>MEA2</code></td><td>Structure-only extraction with one-hot node-ID features (paper-faithful Wu 2022)</td></tr>
+<tr><td><code>MEA2</code></td><td>Structure-only extraction with one-hot node-ID features</td></tr>
 <tr><td><code>MEA3</code>–<code>MEA5</code></td><td>Shadow-graph and feature-shuffled variants of MEA</td></tr>
 <tr><td><code>AdvMEA</code></td><td>Adversarial-query attack with policy search</td></tr>
 <tr><td><code>CEGA</code></td><td>Centrality- and entropy-driven node selection</td></tr>
 <tr><td><code>Realistic</code></td><td>Structure-aware pipeline with auxiliary edge model</td></tr>
 <tr><td rowspan="3"><b>Data-free</b></td>
-<td><code>DFEA_I</code></td><td>KL-divergence soft-label distillation; ships with synthetic-graph + real-graph proxy variants</td></tr>
-<tr><td><code>DFEA_II</code></td><td>Hard-label supervision; ships with synthetic-graph + real-graph proxy variants</td></tr>
+<td><code>DFEA_I</code></td><td>KL-divergence soft-label distillation</td></tr>
+<tr><td><code>DFEA_II</code></td><td>Hard-label supervision (label-only)</td></tr>
 <tr><td><code>DFEA_III</code></td><td>Label-only + consistency loss between two surrogates</td></tr>
 </table>
 
@@ -312,11 +312,11 @@ GraphIP-Bench/
 │   ├── datasets/                       # 10 graph datasets + link-pred & graph-class loaders
 │   ├── models/
 │   │   ├── attack/                     # 12 extraction attacks
-│   │   │   ├── mea/MEA.py              #   MEA0–MEA5 (incl. paper-faithful MEA2 Wu2022)
+│   │   │   ├── mea/MEA.py              #   MEA0–MEA5
 │   │   │   ├── AdvMEA.py               #   adversarial-query attack
 │   │   │   ├── CEGA.py                 #   centrality + entropy
 │   │   │   ├── Realistic.py            #   structure-aware pipeline
-│   │   │   ├── DataFreeMEA.py          #   DFEA_I/II/III + real-graph proxies
+│   │   │   ├── DataFreeMEA.py          #   DFEA_I / DFEA_II / DFEA_III
 │   │   │   └── linkpred_attacks.py     #   link-prediction adapters
 │   │   ├── defense/                    # 12 defenses
 │   │   │   ├── BackdoorWM.py · SurviveWM.py · RandomWM.py
@@ -399,7 +399,7 @@ If you use GraphIP-Bench, please cite:
 ```bibtex
 @inproceedings{graphipbench2026,
   title={GraphIP-Bench: How Hard Is It to Steal a Graph Neural Network, and Can We Stop It?},
-  author={Anonymous Authors},
+  author={Zhao, Kaixiang and Shen, Bolin and Dai, Yuyang and Chakraborty, Shayok and Dong, Yushun},
   booktitle={NeurIPS},
   year={2026}
 }
