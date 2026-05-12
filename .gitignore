@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Run outputs / caches
+outputs/
+output/
+logs/
+checkpoints/
+artifacts/
+cache/
+.tmp/
+.tmp*/
+*.jsonl
+*.bak.*
+
+# Dataset cache (auto-populated)
+data/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Notebooks
+.ipynb_checkpoints/
